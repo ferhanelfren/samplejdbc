@@ -36,7 +36,7 @@ public class student {
     
     public void addStudent(UserDAO userdao) {
         try {
-            sql = "INSERT into student (fname, mname, lname, age, address, gender, civilstat) values(?, ?, ?, ?, ?, ?, ?)";
+            sql = "INSERT into students (fname, mname, lname, age, address, gender, civilstat) values(?, ?, ?, ?, ?, ?, ?)";
             ps = connection.prepareStatement(sql);
             ps.setString(1, userdao.getFName());
             ps.setString(2, userdao.getMName());
@@ -62,18 +62,22 @@ public class student {
     public void populateStudentTable(DefaultTableModel tableModel){
         try {
             tableModel.setRowCount(0);
-            sql = "SELECT * FROM student";
+            sql = "SELECT * FROM students";
             ps = connection.prepareStatement(sql);
             rs = ps.executeQuery();
             rsd = rs.getMetaData();
             int colmnsNumber = rsd.getColumnCount();
             
-            while(rs.next()){
-             Object[] row = new Object[colmnsNumber];
-                for (int i = 1; i < colmnsNumber; i++) {
-                    row[i - 1] = rs.getObject(i);
+            while (rs.next()) {
+                Object[] row = new Object[colmnsNumber];
+                for (int i = 1; i <= colmnsNumber; i++) { // Adjusted the loop condition here
+                    Object value = rs.getObject(i);
+                    if (value != null) {
+                        row[i - 1] = value.toString();
+                    } else {
+                        row[i - 1] = null; // Or any default value you want to assign for null values
+                    }
                 }
-                
                 tableModel.addRow(row);
             }
             

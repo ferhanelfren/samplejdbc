@@ -155,8 +155,8 @@ public class addStudent extends javax.swing.JFrame {
                             .addComponent(jCheckBox1)
                             .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 530, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -191,7 +191,7 @@ public class addStudent extends javax.swing.JFrame {
                         .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(submitbutton)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap(12, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(displayLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -255,6 +255,8 @@ public class addStudent extends javax.swing.JFrame {
         Student.addStudent(userdao);
 
             displayLabel.setText(jComboBox1.getSelectedItem().toString());
+            
+            populateStudentTable();
     }//GEN-LAST:event_submitbuttonActionPerformed
 
     private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
@@ -279,6 +281,15 @@ public class addStudent extends javax.swing.JFrame {
         } else if (genderr.equals("Female")) {
             jRadioButton1.setSelected(false);
             jRadioButton2.setSelected(true);
+        }
+        
+        String civilstat = model.getValueAt(selectIndex, 7).toString();
+        if (civilstat.equals("Single")) {
+            jCheckBox1.setSelected(true);
+            jCheckBox2.setSelected(false);
+        } else if (civilstat.equals("Married")) {
+            jCheckBox1.setSelected(false);
+            jCheckBox2.setSelected(true);
         }
         
         
